@@ -17,18 +17,27 @@ namespace InventoryManagementSystemAPI.Controllers
             this.productService = productService;
         }
 
+        // Get all products
         // GET: api/<ProductController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<List<Product>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return productService.Get();
         }
 
+        // Get product by ID
         // GET api/<ProductController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult<Product> Get(string id)
         {
-            return "value";
+            var product = productService.GetById(id);
+
+            if (product == null)
+            {
+                return NotFound($"Product with id {id} not found");
+            }
+
+            return product;
         }
 
         // Create Product Controller
@@ -42,14 +51,36 @@ namespace InventoryManagementSystemAPI.Controllers
 
         // PUT api/<ProductController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(string id, [FromBody] Product product)
         {
+            var updateProduct = productService.GetById(id);
+
+            if (updateProduct == null)
+            {
+                return NotFound($"Product with id {id} not found");
+            }
+
+            productService.UpdateProduct(id, product);
+
+            return Ok(updateProduct);
+
+
         }
 
         // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(string id)
         {
+            var deleteProduct = productService.GetById(id);
+
+            if(deleteProduct == null)
+            {
+                return NotFound($"Product with id {id} not found");
+            }
+
+            productService.DeleteProduct(id);
+
+            return Ok($"Product with id {id} deleted");
         }
     }
 }
