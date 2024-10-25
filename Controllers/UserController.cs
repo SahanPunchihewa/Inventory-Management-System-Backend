@@ -77,6 +77,14 @@ namespace InventoryManagementSystemAPI.Controllers
         [HttpPost("register")]
         public ActionResult<User> Register([FromBody] User request)
         {
+
+            var checkUsername = userService.GetByUsername(request.Username);
+            if (checkUsername != null)
+            {
+
+                return BadRequest("Username is already taken");
+            }
+
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
             request.Password = passwordHash;
 

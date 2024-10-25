@@ -48,6 +48,7 @@ builder.Services.AddSingleton<IMongoClient>(s =>
 
 // Add Services
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 // Services
 
