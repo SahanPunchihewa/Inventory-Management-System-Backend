@@ -71,6 +71,36 @@ namespace InventoryManagementSystemAPI.Controllers
 
         }
 
+        // POST api/<AdminUserControleer>/login
+        [AllowAnonymous]
+        [HttpPost("login")]
+
+        public ActionResult<AdminUser> Login([FromBody] AdminUser request)
+        {
+            var adminUser = adminService.GetByUsername(request.Username);
+
+            if(adminUser == null)
+            {
+                return BadRequest("Invalid Credentials");
+            }
+
+            bool verified = BCrypt.Net.BCrypt.Verify(request.Password, adminUser.Password);
+
+            if(!verified)
+            {
+                return BadRequest("Invalid Credentials");
+            }
+            string jwt = CreateToken(adminUser);
+
+            return Ok(new
+            {
+                Id = adminUser.Id,
+                UserName = adminUser.Username,
+                Token = jwt,
+                Role = IdentityData.AdminUserClaimName
+            });
+        }
+
         // GET: api/<AdminUserController>
         [HttpGet]
         public IEnumerable<string> Get()
