@@ -33,6 +33,7 @@ builder.Services.AddAuthentication(x =>
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy(IdentityData.AdminUserPolicyName, policy => policy.RequireClaim(IdentityData.AdminUserClaimName, "true"));
+    options.AddPolicy(IdentityData.EmployeeUserPolicyName, policy => policy.RequireClaim(IdentityData.EmployeeUserClaimName, "true"));
 });
 
 // Add services to the container.
@@ -46,7 +47,7 @@ builder.Services.AddSingleton<IMongoClient>(s =>
         new MongoClient(builder.Configuration.GetValue<string>("DatabaseSettings:ConnectionString")));
 
 // Add Services
-builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 // Services
 
