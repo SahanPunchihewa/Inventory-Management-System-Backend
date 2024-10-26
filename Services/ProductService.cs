@@ -51,5 +51,29 @@ namespace InventoryManagementSystemAPI.Services
 
             return _product.Find(product => product.QuantityInStock < product.MininumStockLevel).ToList();
         }
+
+        // Get out of stock product
+        public List<Product> GetOutOfStockProduct()
+        {
+            return _product.Find(product => product.QuantityInStock == 0).ToList();
+        }
+
+        // Get inventory summary
+        public object GetInventorySummary()
+        {
+            var totalProducts = _product.CountDocuments(FilterDefinition<Product>.Empty);
+
+            var lowStockCount = _product.CountDocuments(product => product.QuantityInStock < product.MininumStockLevel);
+
+            var outOfStockCount = _product.CountDocuments(product => product.QuantityInStock == 0);
+
+            return (object)new InventorySummary
+            {
+                TotalProducts = totalProducts,
+                LowStockProduct = lowStockCount,
+                OutOfStockProduct = outOfStockCount
+            };
+
+        }
     }
 }

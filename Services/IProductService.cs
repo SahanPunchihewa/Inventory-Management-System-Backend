@@ -15,5 +15,8 @@ namespace InventoryManagementSystemAPI.Services
         void DeleteProduct(string id);
 
         List<Product> GetLowOfStockProduct();
+
+        List<Product> GetOutOfStockProduct();
+        object GetInventorySummary();
     }
 }
