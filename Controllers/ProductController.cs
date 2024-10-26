@@ -25,10 +25,27 @@ namespace InventoryManagementSystemAPI.Controllers
             return productService.Get();
         }
 
+
+        // GET: api/<ProductController>/lowStock 
         [HttpGet("lowStock")]
         public ActionResult<List<Product>> GetLowOfStockProduct()
         {
             return productService.GetLowOfStockProduct();
+        }
+
+        // GET: api/<ProductController>/outOfStock
+        [HttpGet("outOfStock")]
+        public ActionResult<List<Product>> GetOutOfStockProduct()
+        {
+            return productService.GetOutOfStockProduct();
+        }
+
+        // GET: api/<ProductController>/inventorySummary
+        [HttpGet("inventorySummary")]
+        public ActionResult GetInventorySummary()
+        {
+            var summary = productService.GetInventorySummary();
+            return Ok(summary);
         }
 
         // Get product by ID
