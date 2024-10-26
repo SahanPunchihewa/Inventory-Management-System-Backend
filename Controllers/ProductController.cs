@@ -65,7 +65,7 @@ namespace InventoryManagementSystemAPI.Controllers
 
         // Create Product Controller
         // POST api/<ProductController>
-        [HttpPost]
+        [HttpPost("create")]
         public ActionResult<Product> Post([FromBody] Product product)
         {
             productService.Create(product);
