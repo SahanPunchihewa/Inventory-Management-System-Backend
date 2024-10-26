@@ -44,5 +44,12 @@ namespace InventoryManagementSystemAPI.Services
 
            _product.ReplaceOne(product => product.Id == id, product);
         }
+
+        // Get low stock product
+        public List<Product> GetLowOfStockProduct()
+        {
+
+            return _product.Find(product => product.QuantityInStock < product.MininumStockLevel).ToList();
+        }
     }
 }

@@ -25,6 +25,12 @@ namespace InventoryManagementSystemAPI.Controllers
             return productService.Get();
         }
 
+        [HttpGet("lowStock")]
+        public ActionResult<List<Product>> GetLowOfStockProduct()
+        {
+            return productService.GetLowOfStockProduct();
+        }
+
         // Get product by ID
         // GET api/<ProductController>/5
         [HttpGet("{id}")]
@@ -62,7 +68,7 @@ namespace InventoryManagementSystemAPI.Controllers
 
             productService.UpdateProduct(id, product);
 
-            return Ok(updateProduct);
+            return Ok(product);
 
 
         }
@@ -82,5 +88,6 @@ namespace InventoryManagementSystemAPI.Controllers
 
             return Ok($"Product with id {id} deleted");
         }
+ 
     }
 }
