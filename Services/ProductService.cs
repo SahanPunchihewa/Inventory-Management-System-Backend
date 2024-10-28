@@ -67,11 +67,15 @@ namespace InventoryManagementSystemAPI.Services
 
             var outOfStockCount = _product.CountDocuments(product => product.QuantityInStock == 0);
 
+            var totalValue = _product.AsQueryable().Select(product => product.QuantityInStock * product.Price).Sum();
+
             return (object)new InventorySummary
             {
                 TotalProducts = totalProducts,
                 LowStockProduct = lowStockCount,
-                OutOfStockProduct = outOfStockCount
+                OutOfStockProduct = outOfStockCount,
+                TotalValue = (long)totalValue,
+
             };
 
         }
