@@ -49,7 +49,7 @@ namespace InventoryManagementSystemAPI.Services
         public List<Product> GetLowOfStockProduct()
         {
 
-            return _product.Find(product => product.QuantityInStock < product.MininumStockLevel).ToList();
+            return _product.Find(product => product.QuantityInStock > 0 && product.QuantityInStock <= product.MininumStockLevel).ToList();
         }
 
         // Get out of stock product
