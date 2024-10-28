@@ -7,5 +7,7 @@
         public long LowStockProduct {  get; set; }
 
         public long OutOfStockProduct { get; set; }
+
+        public long TotalValue { get; set; }
     }
 }
