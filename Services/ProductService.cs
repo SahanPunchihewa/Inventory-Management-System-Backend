@@ -63,7 +63,7 @@ namespace InventoryManagementSystemAPI.Services
         {
             var totalProducts = _product.CountDocuments(FilterDefinition<Product>.Empty);
 
-            var lowStockCount = _product.CountDocuments(product => product.QuantityInStock < product.MininumStockLevel);
+            var lowStockCount = _product.CountDocuments(product => product.QuantityInStock > 0 && product.QuantityInStock <= product.MininumStockLevel);
 
             var outOfStockCount = _product.CountDocuments(product => product.QuantityInStock == 0);
 
