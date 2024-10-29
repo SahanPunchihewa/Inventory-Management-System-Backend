@@ -59,10 +59,11 @@ namespace InventoryManagementSystemAPI.Controllers
         }
 
         // GET: api/<UserController>
+        [AllowAnonymous]
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<List<User>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return userService.GetAll();
         }
 
         // GET api/<UserController>/5
@@ -79,7 +80,9 @@ namespace InventoryManagementSystemAPI.Controllers
         {
 
             var checkUsername = userService.GetByUsername(request.Username);
-            if (checkUsername != null)
+            var checkEmail = userService.GetByEmail(request.Email);
+
+            if (checkUsername != null && checkEmail != null)
             {
 
                 return BadRequest("Username is already taken");
@@ -120,7 +123,7 @@ namespace InventoryManagementSystemAPI.Controllers
             return Ok(new
             {
                 Id = user.Id,
-                UserName = user.Username,
+                Username = user.Username,
                 Token = jwt,
                 Role = role
             });

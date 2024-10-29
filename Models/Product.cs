@@ -25,8 +25,8 @@ namespace InventoryManagementSystemAPI.Models
         [BsonElement("price")]
         public decimal Price { get; set; }
 
-        [BsonElement("mininumStockLevel")]
+        [BsonElement("minimumStockLevel")]
         [BsonIgnoreIfNull]
-        public int MininumStockLevel {  get; set; }
+        public int MinimumStockLevel {  get; set; }
     }
 }
