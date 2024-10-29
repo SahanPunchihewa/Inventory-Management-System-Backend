@@ -25,5 +25,16 @@ namespace InventoryManagementSystemAPI.Services
         {
             return _user.Find(user => user.Username == username).FirstOrDefault();
         }
+
+        public User GetByEmail(string email)
+        { 
+            return _user.Find(user => user.Email == email).FirstOrDefault();
+        }
+
+        public List<User> GetAll()
+        {
+            return _user.Find(user => true).ToList();
+
+        }
     }
 }

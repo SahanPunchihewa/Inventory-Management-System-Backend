@@ -49,7 +49,7 @@ namespace InventoryManagementSystemAPI.Services
         public List<Product> GetLowOfStockProduct()
         {
 
-            return _product.Find(product => product.QuantityInStock > 0 && product.QuantityInStock <= product.MininumStockLevel).ToList();
+            return _product.Find(product => product.QuantityInStock > 0 && product.QuantityInStock <= product.MinimumStockLevel).ToList();
         }
 
         // Get out of stock product
@@ -63,7 +63,7 @@ namespace InventoryManagementSystemAPI.Services
         {
             var totalProducts = _product.CountDocuments(FilterDefinition<Product>.Empty);
 
-            var lowStockCount = _product.CountDocuments(product => product.QuantityInStock > 0 && product.QuantityInStock <= product.MininumStockLevel);
+            var lowStockCount = _product.CountDocuments(product => product.QuantityInStock > 0 && product.QuantityInStock <= product.MinimumStockLevel);
 
             var outOfStockCount = _product.CountDocuments(product => product.QuantityInStock == 0);
 
