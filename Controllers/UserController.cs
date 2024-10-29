@@ -67,10 +67,18 @@ namespace InventoryManagementSystemAPI.Controllers
         }
 
         // GET api/<UserController>/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult<User> Get(string id)
         {
-            return "value";
+           var userDetails = userService.GetById(id);
+
+            if (userDetails == null)
+            {
+                return NotFound($"User with id {id} not found");
+            }
+            return Ok(userDetails);
+            
         }
 
         // POST api/<UserController>/register
