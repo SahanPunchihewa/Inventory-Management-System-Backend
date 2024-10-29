@@ -27,7 +27,7 @@ namespace InventoryManagementSystemAPI.Services
         }
 
         public User GetByEmail(string email)
-        { 
+        {
             return _user.Find(user => user.Email == email).FirstOrDefault();
         }
 
@@ -35,6 +35,21 @@ namespace InventoryManagementSystemAPI.Services
         {
             return _user.Find(user => true).ToList();
 
+        }
+
+        public void UpdateUser(string id, User user)
+        {
+            _user.ReplaceOne(user => user.Id == id, user);
+        }
+
+        public void DeleteUser(string id)
+        { 
+            _user.DeleteOne(user => user.Id == user.Id);
+        }
+
+        public User GetById(string id)
+        { 
+            return _user.Find(user => user.Id == id).FirstOrDefault();
         }
     }
 }
