@@ -11,7 +11,7 @@ namespace InventoryManagementSystemAPI.Models
         public string Id { get; set; } = string.Empty;
 
         [BsonElement("productId")]
-        public int ProductId { get; set; } = int.MaxValue;
+        public int ProductId { get; set; }
 
         [BsonElement("name")]
         public string Name { get; set; } = string.Empty;
@@ -20,13 +20,13 @@ namespace InventoryManagementSystemAPI.Models
         public string Description { get; set; } = string.Empty;
 
         [BsonElement("quantityInStock")]
-        public int QuantityInStock { get; set; } = int.MaxValue;
+        public int QuantityInStock { get; set; } 
 
         [BsonElement("price")]
-        public decimal Price { get; set; } = decimal.MaxValue;
+        public decimal Price { get; set; }
 
         [BsonElement("mininumStockLevel")]
         [BsonIgnoreIfNull]
-        public int MininumStockLevel {  get; set; } = int.MaxValue;
+        public int MininumStockLevel {  get; set; }
     }
 }
