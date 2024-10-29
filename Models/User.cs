@@ -13,6 +13,12 @@ namespace InventoryManagementSystemAPI.Models
         [BsonElement("username")]
         public string Username { get; set; } = String.Empty;
 
+        [BsonElement("email")]
+        public string Email { get; set; } = String.Empty;
+
+        [BsonElement("contact")]
+        public string Contact {  get; set; } = String.Empty;
+
         [BsonElement("password")]
         public string Password { get; set; } = String.Empty;
 

@@ -7,5 +7,9 @@ namespace InventoryManagementSystemAPI.Services
         User Create(User user);
 
         User GetByUsername(string username);
+
+        User GetByEmail(string email);
+
+        List<User> GetAll();
     }
 }
