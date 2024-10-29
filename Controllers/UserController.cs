@@ -122,8 +122,8 @@ namespace InventoryManagementSystemAPI.Controllers
 
             return Ok(new
             {
-                Id = user.Id,
-                Username = user.Username,
+                id= user.Id,
+                username = user.Username,
                 Token = jwt,
                 Role = role
             });
@@ -131,15 +131,39 @@ namespace InventoryManagementSystemAPI.Controllers
 
 
         // PUT api/<UserController>/5
+        [AllowAnonymous]
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(string id, [FromBody] User user)
         {
+            var updateUser = userService.GetById(id);
+
+            if (updateUser == null)
+            {
+                return NotFound($"User with Id = {id} not found");
+                
+            }
+
+            userService.UpdateUser(updateUser.Id, user);
+
+            return Ok(user);
         }
 
         // DELETE api/<UserController>/5
+        [AllowAnonymous]
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(string id)
         {
+            var user = userService.GetById(id);
+
+            if (user == null)
+            {
+                return NotFound($"User with Id = {id} not found");
+            }
+
+            userService.DeleteUser(user.Id);
+
+            return Ok($"User with Id = {id} not found");
+
         }
     }
 }
