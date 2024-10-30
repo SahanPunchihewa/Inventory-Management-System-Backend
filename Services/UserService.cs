@@ -44,7 +44,7 @@ namespace InventoryManagementSystemAPI.Services
 
         public void DeleteUser(string id)
         { 
-            _user.DeleteOne(user => user.Id == user.Id);
+            _user.DeleteOne(user => user.Id == id);
         }
 
         public User GetById(string id)
