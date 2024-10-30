@@ -59,7 +59,8 @@ namespace InventoryManagementSystemAPI.Controllers
         }
 
         // GET: api/<UserController>
-        [AllowAnonymous]
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
+        [Authorize(Policy = IdentityData.EmployeeUserPolicyName)]
         [HttpGet]
         public ActionResult<List<User>> Get()
         {
@@ -67,7 +68,8 @@ namespace InventoryManagementSystemAPI.Controllers
         }
 
         // GET api/<UserController>/5
-        [AllowAnonymous]
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
+        [Authorize(Policy = IdentityData.EmployeeUserPolicyName)]
         [HttpGet("{id}")]
         public ActionResult<User> Get(string id)
         {
@@ -82,7 +84,7 @@ namespace InventoryManagementSystemAPI.Controllers
         }
 
         // POST api/<UserController>/register
-        [AllowAnonymous]
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
         [HttpPost("register")]
         public ActionResult<User> Register([FromBody] User request)
         {
@@ -139,7 +141,7 @@ namespace InventoryManagementSystemAPI.Controllers
 
 
         // PUT api/<UserController>/5
-        [AllowAnonymous]
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
         [HttpPut("{id}")]
         public ActionResult Put(string id, [FromBody] User user)
         {
@@ -157,7 +159,7 @@ namespace InventoryManagementSystemAPI.Controllers
         }
 
         // DELETE api/<UserController>/5
-        [AllowAnonymous]
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
         [HttpDelete("{id}")]
         public ActionResult Delete(string id)
         {

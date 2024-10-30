@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using InventoryManagementSystemAPI.Models;
 using InventoryManagementSystemAPI.Services;
+using InventoryManagementSystemAPI.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace InventoryManagementSystemAPI.Controllers
 {
+    [Authorize(Policy = IdentityData.AdminUserPolicyName)]
+    [Authorize(Policy = IdentityData.EmployeeUserPolicyName)]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -19,6 +23,8 @@ namespace InventoryManagementSystemAPI.Controllers
 
         // Get all products
         // GET: api/<ProductController>
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
+        [Authorize(Policy = IdentityData.EmployeeUserPolicyName)]
         [HttpGet]
         public ActionResult<List<Product>> Get()
         {
@@ -27,6 +33,8 @@ namespace InventoryManagementSystemAPI.Controllers
 
 
         // GET: api/<ProductController>/lowStock 
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
+        [Authorize(Policy = IdentityData.EmployeeUserPolicyName)]
         [HttpGet("lowStock")]
         public ActionResult<List<Product>> GetLowOfStockProduct()
         {
@@ -34,6 +42,8 @@ namespace InventoryManagementSystemAPI.Controllers
         }
 
         // GET: api/<ProductController>/outOfStock
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
+        [Authorize(Policy = IdentityData.EmployeeUserPolicyName)]
         [HttpGet("outOfStock")]
         public ActionResult<List<Product>> GetOutOfStockProduct()
         {
@@ -41,6 +51,8 @@ namespace InventoryManagementSystemAPI.Controllers
         }
 
         // GET: api/<ProductController>/inventorySummary
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
+        [Authorize(Policy = IdentityData.EmployeeUserPolicyName)]
         [HttpGet("inventorySummary")]
         public ActionResult GetInventorySummary()
         {
@@ -50,6 +62,8 @@ namespace InventoryManagementSystemAPI.Controllers
 
         // Get product by ID
         // GET api/<ProductController>/5
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
+        [Authorize(Policy = IdentityData.EmployeeUserPolicyName)]
         [HttpGet("{id}")]
         public ActionResult<Product> Get(string id)
         {
@@ -65,6 +79,7 @@ namespace InventoryManagementSystemAPI.Controllers
 
         // Create Product Controller
         // POST api/<ProductController>
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
         [HttpPost("create")]
         public ActionResult<Product> Post([FromBody] Product product)
         {
@@ -73,6 +88,8 @@ namespace InventoryManagementSystemAPI.Controllers
         }
 
         // PUT api/<ProductController>/5
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
+        [Authorize(Policy = IdentityData.EmployeeUserPolicyName)]
         [HttpPut("{id}")]
         public ActionResult Put(string id, [FromBody] Product product)
         {
@@ -91,6 +108,7 @@ namespace InventoryManagementSystemAPI.Controllers
         }
 
         // DELETE api/<ProductController>/5
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
         [HttpDelete("{id}")]
         public ActionResult Delete(string id)
         {
