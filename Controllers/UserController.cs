@@ -59,8 +59,7 @@ namespace InventoryManagementSystemAPI.Controllers
         }
 
         // GET: api/<UserController>
-        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
-        [Authorize(Policy = IdentityData.EmployeeUserPolicyName)]
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult<List<User>> Get()
         {
@@ -68,8 +67,7 @@ namespace InventoryManagementSystemAPI.Controllers
         }
 
         // GET api/<UserController>/5
-        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
-        [Authorize(Policy = IdentityData.EmployeeUserPolicyName)]
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult<User> Get(string id)
         {
@@ -141,7 +139,7 @@ namespace InventoryManagementSystemAPI.Controllers
 
 
         // PUT api/<UserController>/5
-        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
+        [AllowAnonymous]
         [HttpPut("{id}")]
         public ActionResult Put(string id, [FromBody] User user)
         {
